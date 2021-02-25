@@ -3,24 +3,29 @@
 // Random number generator
 let ranNum = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
+let highscore = 0;
 
 // Check button select and type coercion
 document.querySelector('.check').addEventListener('click', function() {
     const guess = Number(document.querySelector('.guess').value);
-    let highScore = 0;
 
     // When no input or not a number
-    if (!guess || typeof guess !== 'number') {
+    if (!guess) {
         document.querySelector('.message').textContent = `No number provided!`;
 
-    // When player wins
+    // Player wins
     } else if (guess === ranNum) {
         document.querySelector('.message').textContent = `You have guessed correctly!`;
         // Change background color to green upon win
         document.querySelector('body').style.backgroundColor = 'Green';
         document.querySelector('.number').style.width = '30rem';
         document.querySelector('.number').textContent = ranNum;
-        
+
+        if (score > highscore) {
+            highscore = score;
+            document.querySelector('.highscore').textContent = highscore;
+        }
+
     // Guess is too high
     } else if (guess > ranNum) {
         if (score > 1) {
