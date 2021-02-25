@@ -5,56 +5,61 @@ let ranNum = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
 
+// Refactor message
+const displayMessage = function(message) {
+    document.querySelector('.message').textContent = message;
+}
+
+// Background change 
+const displayBackground = function(bg) {
+    document.querySelector('body').style.backgroundColor = bg;
+}
+
+// Score function
+const displayScore = function(scr) {
+    document.querySelector('.score').textContent = scr;
+}
+
 // Check button select and type coercion
 document.querySelector('.check').addEventListener('click', function() {
     const guess = Number(document.querySelector('.guess').value);
 
     // When no input or not a number
     if (!guess) {
-        document.querySelector('.message').textContent = `No number provided!`;
+        displayMessage(`No number provided!`);
 
     // Player wins
     } else if (guess === ranNum) {
-        document.querySelector('.message').textContent = `You have guessed correctly!`;
+        displayMessage(`You have guessed correctly!`);
         // Change background color to green upon win
-        document.querySelector('body').style.backgroundColor = 'Green';
+        displayBackground('Green');
         document.querySelector('.number').style.width = '30rem';
         document.querySelector('.number').textContent = ranNum;
 
         if (score > highscore) {
             highscore = score;
-            document.querySelector('.highscore').textContent = highscore;
+            displayScore(highscore);
         }
 
-    // Guess is too high
-    } else if (guess > ranNum) {
+    } else if (guess !== ranNum) {
         if (score > 1) {
-            document.querySelector('.message').textContent = `Your guess is too high! Try again.`;
+            displayMessage(guess > ranNum ? `Your guess is too high! Try again.` : `Your guess is too low! Try again.`);
             score--;
-            document.querySelector('.score').textContent = score;
-        }else {
-            document.querySelector('.message').textContent = `Game over. Please try again.`;
-        }
-
-    // Guess too low
-    } else if (guess < ranNum){
-        if (score > 1) {
-            document.querySelector('.message').textContent = `Your guess is too low! Try again.`;
-            score--;
-            document.querySelector('.score').textContent = score;
+            displayScore(score);
         } else {
-            document.querySelector('.message').textContent = `Game over. Please try again.`;
+            displayMessage(`Game over. Please try again.`);
+            displayScore('0');
         }
     }
 });
 
 // To reset the game
-document.querySelector('.again').addEventListener('click', function() {
+document.querySelector('.reset').addEventListener('click', function() {
     let ranNum = Math.trunc(Math.random() * 20) + 1;
-    document.querySelector('body').style.backgroundColor = "rgb(145, 63, 63)";
+    displayBackground("rgb(145, 63, 63)");
     document.querySelector('.number').style.width = '15rem';
     document.querySelector('.number').textContent = '?';
-    document.querySelector('.message').textContent = 'Start guessing...'
-    document.querySelector('.score').textContent = '20';
+    displayMessage(`Start guessing...`);
+    displayScore('20');
     document.querySelector('.guess').value = '';
 });
