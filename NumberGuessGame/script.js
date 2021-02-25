@@ -20,6 +20,14 @@ const displayScore = function(scr) {
     document.querySelector('.score').textContent = scr;
 }
 
+const changeWidth = function(cw) {
+    document.querySelector('.number').style.width = cw;
+}
+
+const resetNum = function(rn) {
+    document.querySelector('.number').textContent = rn;
+}
+
 // Check button select and type coercion
 document.querySelector('.check').addEventListener('click', function() {
     const guess = Number(document.querySelector('.guess').value);
@@ -33,8 +41,8 @@ document.querySelector('.check').addEventListener('click', function() {
         displayMessage(`You have guessed correctly!`);
         // Change background color to green upon win
         displayBackground('Green');
-        document.querySelector('.number').style.width = '30rem';
-        document.querySelector('.number').textContent = ranNum;
+        changeWidth('30rem');
+        resetNum(ranNum);
 
         if (score > highscore) {
             highscore = score;
@@ -57,8 +65,8 @@ document.querySelector('.check').addEventListener('click', function() {
 document.querySelector('.reset').addEventListener('click', function() {
     let ranNum = Math.trunc(Math.random() * 20) + 1;
     displayBackground("rgb(145, 63, 63)");
-    document.querySelector('.number').style.width = '15rem';
-    document.querySelector('.number').textContent = '?';
+    changeWidth('15rem');
+    resetNum('?');
     displayMessage(`Start guessing...`);
     displayScore('20');
     document.querySelector('.guess').value = '';
