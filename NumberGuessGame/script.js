@@ -1,14 +1,20 @@
 'use strict'
 
-// console.log(document.querySelector('.message').textContent);
-// document.querySelector('.message').textContent = 'Correct Number!'
+// Random number generator
+const ranNum = Math.trunc(Math.random() * 20) + 1;
+document.querySelector('.number').textContent = ranNum;
 
-// document.querySelector('.number').textContent = 13;
-// document.querySelector('.score').textContent = 10;
-
-// document.querySelector('.guess').value = 23;
-// console.log(document.querySelector('.guess').value);
-
+// Check button select and type coercion
 document.querySelector('.check').addEventListener('click', function() {
-    console.log(document.querySelector('.guess').value);
+    const guess = Number(document.querySelector('.guess').value);
+
+    if (!guess || typeof(guess) !== 'number') {
+        document.querySelector('.message').textContent = `No number provided!`;
+    } else if (guess === ranNum) {
+        document.querySelector('.message').textContent = `You have guessed correctly!`;
+    } else if (guess > ranNum) {
+        document.querySelector('.message').textContent = `Your guess is too high! Try again.`;
+    } else {
+        document.querySelector('.message').textContent = `Your guess is too low! Try again.`;
+    } 
 });
