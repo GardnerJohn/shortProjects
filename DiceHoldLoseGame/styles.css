@@ -129,13 +129,13 @@ main {
   margin-right: 0.7rem;
 }
 
-.btn--new {
+.btn-new {
   top: 4rem;
 }
-.btn--roll {
+.btn-roll {
   top: 39.3rem;
 }
-.btn--hold {
+.btn-hold {
   top: 46.1rem;
 }
 
@@ -164,4 +164,8 @@ main {
 .player--winner .name {
   font-weight: 700;
   color: #0f9721;
+}
+
+.hidden {
+  display: none;
 }
